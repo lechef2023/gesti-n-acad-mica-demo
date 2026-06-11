@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/gesti-n-acad-mica-demo/static/css/main.4df2efaa.css",
-    "main.js": "/gesti-n-acad-mica-demo/static/js/main.8a5eba30.js",
+    "main.css": "/gesti-n-acad-mica-demo/static/css/main.cddbb537.css",
+    "main.js": "/gesti-n-acad-mica-demo/static/js/main.bd9ca820.js",
     "static/js/52.42390078.chunk.js": "/gesti-n-acad-mica-demo/static/js/52.42390078.chunk.js",
     "static/js/760.f2df3b9b.chunk.js": "/gesti-n-acad-mica-demo/static/js/760.f2df3b9b.chunk.js",
     "static/js/239.a498ba1d.chunk.js": "/gesti-n-acad-mica-demo/static/js/239.a498ba1d.chunk.js",
     "index.html": "/gesti-n-acad-mica-demo/index.html"
   },
   "entrypoints": [
-    "static/css/main.4df2efaa.css",
-    "static/js/main.8a5eba30.js"
+    "static/css/main.cddbb537.css",
+    "static/js/main.bd9ca820.js"
   ]
 }
