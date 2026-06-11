@@ -29,7 +29,7 @@ const Login = ({ setAuthUser }: { setAuthUser: (user: any) => void }) => {
             <div style={{ position: 'absolute', top: -100, left: -100, width: 400, height: 400, background: 'var(--color-vinotinto-glow)', filter: 'blur(100px)', borderRadius: '50%', zIndex: 0 }} />
             <div style={{ position: 'absolute', bottom: -100, right: -100, width: 400, height: 400, background: 'var(--color-navy-glow)', filter: 'blur(100px)', borderRadius: '50%', zIndex: 0 }} />
 
-            <div className="glass-panel" style={{ width: '100%', maxWidth: '440px', padding: '3rem 2.5rem', zIndex: 1, position: 'relative' }}>
+            <div className="glass-panel login-panel">
                 <div className="flex-center" style={{ flexDirection: 'column', marginBottom: '2.5rem', gap: '1rem' }}>
                     <div style={{ width: 80, height: 80, borderRadius: '20px', background: 'linear-gradient(135deg, rgba(128,0,32,0.2), rgba(26,35,126,0.3))', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--border-active)', boxShadow: 'var(--shadow-glow)' }}>
                         <School color="var(--color-yellow)" size={40} />

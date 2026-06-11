@@ -44,70 +44,65 @@ const MisNotas = ({ user }: { user: any }) => {
     };
 
     return (
-        <div className="container animate-fade-in" style={{ padding: '2rem' }}>
-            <h1 className="gradient-text-vinotinto">Boletín de Calificaciones</h1>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Consulte las notas y genere reportes por cada representado.</p>
+        <div className="page-container animate-fade-in">
+            <h1 className="gradient-text-vinotinto" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.5rem)' }}>Boletín de Calificaciones</h1>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>Consulte las notas y genere reportes por cada representado.</p>
 
             {myStudents.length === 0 ? (
                 <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center' }}>
                     No tiene estudiantes asignados.
                 </div>
             ) : (
-                <div className="grid grid-3">
-                    <div className="glass-panel" style={{ padding: '1.5rem', gridColumn: 'span 1' }}>
-                        <h3 style={{ marginBottom: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.5rem' }}>Mis Representados</h3>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            {myStudents.map(student => (
-                                <button
-                                    key={student.id}
-                                    onClick={() => setSelectedStudent(student.id)}
-                                    style={{
-                                        padding: '1rem',
-                                        textAlign: 'left',
-                                        background: selectedStudent === student.id ? 'rgba(128, 0, 32, 0.2)' : 'transparent',
-                                        border: selectedStudent === student.id ? '1px solid var(--color-vinotinto-light)' : '1px solid var(--border-subtle)',
-                                        borderRadius: 'var(--radius-sm)',
-                                        color: 'var(--text-primary)',
-                                        cursor: 'pointer',
-                                        transition: 'all 0.2s'
-                                    }}
-                                >
-                                    <div style={{ fontWeight: 600 }}>{student.name}</div>
-                                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                                        {student.grade} "{student.section}"
-                                    </div>
-                                </button>
-                            ))}
-                        </div>
+                <>
+                    {/* Selector de representados: horizontal scroll en móvil, columna lateral en desktop */}
+                    <div className="student-selector-bar">
+                        {myStudents.map(student => (
+                            <button
+                                key={student.id}
+                                onClick={() => setSelectedStudent(student.id)}
+                                className={`student-tab-btn ${selectedStudent === student.id ? 'active' : ''}`}
+                            >
+                                <div style={{ fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap' }}>{student.name}</div>
+                                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
+                                    {student.grade} "{student.section}"
+                                </div>
+                            </button>
+                        ))}
                     </div>
 
-                    <div className="glass-panel" style={{ padding: '2rem', gridColumn: 'span 2' }}>
-                        {selectedStudent && (() => {
-                            const student = myStudents.find(s => s.id === selectedStudent);
-                            if (!student) return null;
+                    {/* Contenido de notas */}
+                    {selectedStudent && (() => {
+                        const student = myStudents.find(s => s.id === selectedStudent);
+                        if (!student) return null;
 
-                            return (
-                                <div>
-                                    <div className="flex-between" style={{ marginBottom: '1.5rem' }}>
-                                        <div>
-                                            <h2 style={{ color: 'var(--color-yellow)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                                <BookOpen size={24} />
-                                                {student.name}
-                                            </h2>
-                                            <div style={{ color: 'var(--text-secondary)', marginTop: '0.25rem' }}>Registro Académico • {student.grade} "{student.section}"</div>
+                        return (
+                            <div className="glass-panel" style={{ padding: 'clamp(1rem, 3vw, 2rem)', marginTop: '1rem' }}>
+                                {/* Cabecera del panel de notas */}
+                                <div style={{ marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    <div>
+                                        <h2 style={{ color: 'var(--color-yellow)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 'clamp(1.1rem, 4vw, 1.5rem)', flexWrap: 'wrap' }}>
+                                            <BookOpen size={22} />
+                                            {student.name}
+                                        </h2>
+                                        <div style={{ color: 'var(--text-secondary)', marginTop: '0.25rem', fontSize: '0.875rem' }}>
+                                            Registro Académico • {student.grade} "{student.section}"
                                         </div>
-                                        {student.solvent ? (
-                                            <button className="btn btn-primary" onClick={() => generatePDF(student)}>
-                                                Descargar Boletín PDF
-                                            </button>
-                                        ) : (
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ff5252', background: 'rgba(255, 82, 82, 0.1)', padding: '0.5rem 1rem', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(255, 82, 82, 0.3)' }}>
-                                                <AlertCircle size={18} />
-                                                <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Solvencia Requerida</span>
-                                            </div>
-                                        )}
                                     </div>
 
+                                    {student.solvent ? (
+                                        <button className="btn btn-primary" onClick={() => generatePDF(student)} style={{ width: '100%', maxWidth: '280px' }}>
+                                            Descargar Boletín PDF
+                                        </button>
+                                    ) : (
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ff5252', background: 'rgba(255, 82, 82, 0.1)', padding: '0.75rem 1rem', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(255, 82, 82, 0.3)', flexWrap: 'wrap' }}>
+                                            <AlertCircle size={18} style={{ flexShrink: 0 }} />
+                                            <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Solvencia Requerida para emitir el boletín</span>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Tabla de notas */}
+                                <div className="table-container">
                                     <table className="data-table">
                                         <thead>
                                             <tr>
@@ -148,19 +143,20 @@ const MisNotas = ({ user }: { user: any }) => {
                                             ))}
                                         </tbody>
                                     </table>
+                                </div>
 
-                                    <div className="glass-card" style={{ marginTop: '2rem', padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem', background: 'rgba(26, 35, 126, 0.2)', border: '1px solid rgba(26, 35, 126, 0.4)' }}>
-                                        <Award size={32} color="var(--color-yellow)" />
-                                        <div>
-                                            <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Promedio General</div>
-                                            <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>16.75 <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'normal' }}>/ 20</span></div>
-                                        </div>
+                                {/* Promedio general */}
+                                <div className="glass-card" style={{ marginTop: '1.5rem', padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem', background: 'rgba(26, 35, 126, 0.2)', border: '1px solid rgba(26, 35, 126, 0.4)' }}>
+                                    <Award size={28} color="var(--color-yellow)" style={{ flexShrink: 0 }} />
+                                    <div>
+                                        <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Promedio General del Período</div>
+                                        <div style={{ fontSize: '1.4rem', fontWeight: 'bold' }}>16.75 <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 'normal' }}>/ 20 pts</span></div>
                                     </div>
                                 </div>
-                            );
-                        })()}
-                    </div>
-                </div>
+                            </div>
+                        );
+                    })()}
+                </>
             )}
         </div>
     );

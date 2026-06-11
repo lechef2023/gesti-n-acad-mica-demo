@@ -89,8 +89,8 @@ const Dashboard = ({ user }: { user: any }) => {
     };
 
     return (
-        <div className="container animate-fade-in" style={{ padding: '2rem' }}>
-            <div className="flex-between" style={{ marginBottom: '2rem' }}>
+        <div className="page-container animate-fade-in">
+            <div className="flex-responsive" style={{ marginBottom: '2rem' }}>
                 <div>
                     <h1 className="gradient-text-vinotinto" style={{ margin: 0 }}>Bienvenido(a), {user.name}</h1>
                     <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>

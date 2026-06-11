@@ -56,7 +56,7 @@ const Reportes = ({ user }: { user: any }) => {
     };
 
     return (
-        <div className="container animate-fade-in" style={{ padding: '2rem' }}>
+        <div className="page-container animate-fade-in">
             <h1 className="gradient-text-vinotinto">Generador de Reportes</h1>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Cree listados y reportes institucionales en formato PDF listos para imprimir.</p>
 

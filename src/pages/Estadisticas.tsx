@@ -11,7 +11,7 @@ const Estadisticas = ({ user }: { user: any }) => {
     const percentageDeudores = Math.round((deudores / total) * 100);
 
     return (
-        <div className="container animate-fade-in" style={{ padding: '2rem' }}>
+        <div className="page-container animate-fade-in">
             <h1 className="gradient-text-vinotinto">Análisis y Estadísticas</h1>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Métricas detalladas del rendimiento y estado del alumnado.</p>
 
@@ -85,7 +85,7 @@ const Estadisticas = ({ user }: { user: any }) => {
                     </div>
                 </div>
 
-                <div className="glass-panel" style={{ padding: '2rem', gridColumn: 'span 2' }}>
+                <div className="glass-panel col-span-2" style={{ padding: '2rem' }}>
                     <h3 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <Calendar size={20} color="var(--color-yellow)" /> Resumen Consolidado del Período
                     </h3>

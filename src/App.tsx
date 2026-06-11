@@ -13,6 +13,7 @@ import Estadisticas from './pages/Estadisticas';
 
 function App() {
   const [user, setUser] = useState<any>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   if (!user) {
     return (
@@ -27,9 +28,12 @@ function App() {
   return (
     <Router>
       <div className="app-layout">
-        <Sidebar user={user} />
+        {sidebarOpen && (
+          <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />
+        )}
+        <Sidebar user={user} isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         <div className="main-content">
-          <Topbar user={user} logout={() => setUser(null)} />
+          <Topbar user={user} logout={() => setUser(null)} onOpenSidebar={() => setSidebarOpen(true)} />
           <div style={{ flex: 1, overflowY: 'auto' }}>
             <Routes>
               <Route path="/dashboard" element={<Dashboard user={user} />} />
